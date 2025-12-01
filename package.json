@@ -1,0 +1,135 @@
+{
+  "name": "kimi-k2-agent",
+  "displayName": "Kimi K2 AI Agent",
+  "description": "AI-powered project management with Kimi K2 - file operations, terminal execution, and intelligent error recovery",
+  "version": "0.1.0",
+  "publisher": "kimi-agent",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kimi-ai-agent/vscode-extension"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other",
+    "Machine Learning",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "ai",
+    "kimi",
+    "agent",
+    "automation",
+    "terminal"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "kimi-agent.openChat",
+        "title": "Kimi: Open Chat",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "kimi-agent.executeTask",
+        "title": "Kimi: Execute Task"
+      },
+      {
+        "command": "kimi-agent.cancelTask",
+        "title": "Kimi: Cancel Current Task"
+      },
+      {
+        "command": "kimi-agent.showLogs",
+        "title": "Kimi: Show Logs"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "kimi-agent",
+          "title": "Kimi Agent",
+          "icon": "$(robot)"
+        }
+      ]
+    },
+    "views": {
+      "kimi-agent": [
+        {
+          "type": "webview",
+          "id": "kimi-agent.chatView",
+          "name": "Chat"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Kimi K2 Agent",
+      "properties": {
+        "kimi-agent.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your OpenRouter API key (get one at https://openrouter.ai/keys)"
+        },
+        "kimi-agent.apiEndpoint": {
+          "type": "string",
+          "default": "https://openrouter.ai/api/v1",
+          "description": "API endpoint URL (OpenRouter or compatible)"
+        },
+        "kimi-agent.model": {
+          "type": "string",
+          "default": "moonshotai/kimi-k2:free",
+          "enum": [
+            "moonshotai/kimi-k2:free",
+            "moonshotai/kimi-k2",
+            "anthropic/claude-sonnet-4",
+            "openai/gpt-4o",
+            "google/gemini-2.5-flash-preview-05-20",
+            "deepseek/deepseek-chat-v3-0324"
+          ],
+          "description": "AI model to use via OpenRouter (free tier available)"
+        },
+        "kimi-agent.autoApprove": {
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-approve safe file operations without prompting"
+        },
+        "kimi-agent.maxRetries": {
+          "type": "number",
+          "default": 3,
+          "description": "Maximum retries for error recovery"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "kimi-agent.openChat",
+        "key": "ctrl+shift+k",
+        "mac": "cmd+shift+k"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "esbuild ./src/extension.ts --bundle --outfile=out/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "package:watch": "npm run package -- --watch",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "vsce:package": "vsce package --no-git-tag-version --allow-missing-repository",
+    "vsce:install": "code --install-extension kimi-k2-agent-*.vsix --force"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "@vscode/vsce": "^2.32.0",
+    "esbuild": "^0.27.0",
+    "eslint": "^8.54.0",
+    "typescript": "^5.9.3"
+  }
+}
