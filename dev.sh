@@ -91,7 +91,7 @@ print_footer() {
 print_reload_info() {
   if [ "$NO_RELOAD_INFO" = false ]; then
     echo -e "${YELLOW}Next: Reload VS Code${NC}"
-    echo "  Ctrl+Shift+P → ${CYAN}Developer: Reload Window${NC} → Enter"
+    echo -e "  Ctrl+Shift+P → ${CYAN}Developer: Reload Window${NC} → Enter"
     echo ""
   fi
 }
