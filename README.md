@@ -5,9 +5,12 @@ AI-powered automation extension using Kimi K2 model - execute tasks through natu
 ## Quick Start
 
 ```bash
-./install-global.sh
+npm install
+./dev.sh
 # Reload VS Code: Ctrl+Shift+P → Developer: Reload Window
 ```
+
+The extension is now ready in your VS Code window.
 
 ## Features
 
@@ -20,24 +23,22 @@ AI-powered automation extension using Kimi K2 model - execute tasks through natu
 
 ## Installation
 
-### Option 1: Global Install (Recommended)
-```bash
-./install-global.sh
-```
-
-### Option 2: Manual Installation
+### Option 1: Standard Installation (Recommended)
 ```bash
 npm install
-npm run compile
-npm run package
-code --install-extension kimi-k2-agent-*.vsix
+./dev.sh
+# Reload VS Code: Ctrl+Shift+P → Developer: Reload Window
 ```
 
-### Option 3: Development Mode
+### Option 2: Fast Reinstall (for updates)
 ```bash
-npm install
-npm run watch      # In one terminal
-# Then press F5 in VS Code to start debugging
+./dev.sh --no-build
+# Reload VS Code
+```
+
+### Option 3: Build Only (no install)
+```bash
+./dev.sh --no-install
 ```
 
 ## Configuration
@@ -71,13 +72,16 @@ out/              # Compiled JavaScript (auto-generated)
 ## Development Commands
 
 ```bash
+./dev.sh                     # Full workflow: compile → bundle → package → install (~10s)
+./dev.sh --no-build          # Fast reinstall with existing build (~3s)
+./dev.sh --no-install        # Build only, skip installation
+./dev.sh --help              # Show all options
+
 npm run compile              # TypeScript to JavaScript
 npm run package              # Bundle with esbuild
 npm run watch                # Watch compilation
 npm run lint                 # Run ESLint
-npm test                     # Run tests
-./rebuild.sh                 # Quick rebuild for F5
-./install-global.sh          # Full build + install
+npm run test                 # Run tests
 ```
 
 ## Keyboard Shortcuts
@@ -89,6 +93,7 @@ npm test                     # Run tests
 - VS Code 1.85.0+
 - Node.js 18.0.0+
 - npm 9.0.0+
+- OpenRouter API key (get at https://openrouter.ai)
 
 ## Security
 
@@ -98,10 +103,9 @@ npm test                     # Run tests
 
 ## Documentation
 
-Additional guides available in the project:
-- `INDEX.md` - Documentation overview
-- `AGENTS.md` - Code style and architecture guidelines
-- `COMPLETE_WORKFLOW.md` - Development workflow
+Complete development guide available in:
+- **`development.md`** - Full development workflow and guides
+- **`AGENTS.md`** - Code style and architecture guidelines
 
 ## License
 
