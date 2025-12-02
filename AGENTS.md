@@ -2,23 +2,20 @@
 
 ## Commands
 
-### Build & Package
+### Development Workflow (Recommended)
 ```bash
-npm run compile              # Compile TypeScript to JavaScript
-npm run package             # Bundle extension with esbuild (minified)
-npm run package:watch       # Watch mode for bundling
-./rebuild.sh               # One-command rebuild + cache clear
+./dev.sh                   # Full cycle: compile → bundle → package → install (~10s)
+./dev.sh --no-build        # Fast reinstall with existing build (~3s)
+./dev.sh --no-install      # Build only, don't install
 ```
 
-### Development
+### Individual npm Scripts
 ```bash
+npm run compile            # Compile TypeScript to JavaScript
+npm run package            # Bundle extension with esbuild (minified)
 npm run watch              # Watch TypeScript compilation
 npm run lint               # Run ESLint
 npm run lint -- --fix      # Auto-fix linting issues
-```
-
-### Testing
-```bash
 npm test                   # Run tests
 ```
 
